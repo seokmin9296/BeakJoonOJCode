@@ -1,30 +1,27 @@
-import java.io.IOException;
-import java.util.*;
-public class Main{
-    public static void main(String args[]) throws IOException {
-        scan();
-    }
-    public static void scan(){
-        Scanner sc = new Scanner(System.in);
-        int num = sc.nextInt();
-        double max = 0;
-        double sumFakeScore = 0;
-        List<Double> scoreList = new ArrayList<>();
-        for(int i = 0 ; i < num ; i ++){
-            double score = sc.nextDouble();
-            scoreList.add(score);
-        }
-        for(int i = 0 ; i < scoreList.size(); i ++){
-            if(max < scoreList.get(i)){
-                max = scoreList.get(i);
-            }
-        }
-        for(double fakeScore : scoreList){
-            fakeScore = fakeScore/max*100;
-            sumFakeScore += fakeScore;
-        }
-        double result = sumFakeScore/num;
-        System.out.println(result);
-        sc.close();
-    }
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+		public static void main(String[] args) throws Exception {
+		
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				int n = Integer.parseInt(br.readLine());
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				int[] arr = new int[n];
+				double sum = 0;				
+				int  M = 0;
+				
+				for (int i = 0; i < n; i++) {
+						int score = Integer.parseInt(st.nextToken());
+						arr[i] = score;
+						if (score > M) {
+								M = score;
+						}
+				}
+				for (int i = 0; i < n; i++) {
+						sum += ((double) arr[i] / M) * 100; // new score
+				}
+				System.out.println(sum / n);
+		}
 }
