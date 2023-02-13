@@ -25,11 +25,7 @@ public class Main{
             result = -1;
         }else{
             long benefit = c - b;
-            while (a >= sumBenefit){
-                cnt++;
-                sumBenefit += benefit;
-            }
-            result = cnt;
+            result = (int)(a / benefit) + 1;
         }
 
         return result;
