@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main{
     public static void main(String args[]) throws IOException {
@@ -18,31 +17,38 @@ public class Main{
     }
 
     public static void findPairs(int n){
-        List<Integer> primes = new ArrayList<>();
-        for(int i = 2 ; i <= n ; i ++){
-            if(isPrime(i)){
-                primes.add(i);
-            }
-        }
-        int[] pair = new int[2];
+        ArrayList<Integer> primes = generatePrimes(n);
         int minDiff = n;
-
+        int[] pairs = new int[2];
         for(int i = 0 ; i < primes.size() ; i ++){
-            for(int j = i ; j < primes.size() ; j ++){
-                int sum = primes.get(i) + primes.get(j);
-                if(sum == n){
-                    int diff = primes.get(j) - primes.get(i);
-                    if(diff < minDiff){
-                        pair[0] = primes.get(i);
-                        pair[1] = primes.get(j);
-                        minDiff = diff;
-                    }
+            int p = primes.get(i);
+            if(p > n / 2){
+                break;
+            }
+            int q = n - p;
+            if(isPrime(q)){
+                int diff = q - p;
+                if(diff < minDiff){
+                    pairs[0] = p;
+                    pairs[1] = q;
                 }
             }
         }
-        System.out.println(pair[0] + " " + pair[1]);
+        System.out.println(pairs[0] + " " + pairs[1]);
     }
-
+    public static ArrayList<Integer> generatePrimes(int n){
+        boolean[] isComposite = new boolean[n + 1];
+        ArrayList<Integer> primes = new ArrayList<>();
+        for(int i = 2 ; i <= n ; i ++){
+            if(!isComposite[i]){
+                primes.add(i);
+                for(int j = i * i ; j <= n; j += i){
+                    isComposite[j] = true;
+                }
+            }
+        }
+        return primes;
+    }
     public static boolean isPrime(int n) { // 소수 검증
         if(n <= 1){
             return false;
