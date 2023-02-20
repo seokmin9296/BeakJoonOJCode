@@ -30,7 +30,7 @@ public class Main{
         }
         for(int i = n ; i <= m ; i ++){
             if(prime[i]){
-                System.out.println(i);
+                System.out.print(i + "\n");
             }
         }
     }
