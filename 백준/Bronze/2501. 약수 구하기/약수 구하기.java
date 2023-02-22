@@ -17,11 +17,23 @@ public class Main{
     }
     public static int factors(int a, int b) {
         int cnt = 0;
-        for(int i = 1 ; i <= a; i++){
-            if(a%i == 0){
+        int root = (int)Math.sqrt(a);
+        for(int i = 1 ; i <= root; i++){
+            if(a % i == 0){
                 cnt++;
                 if(cnt == b){
                     return i;
+                }
+            }
+        }
+        if(root*root == a){
+            root--;
+        }
+        for(int i = root; i >= 1; i --){
+            if(a % i == 0){
+                cnt++;
+                if(cnt == b){
+                    return a / i;
                 }
             }
         }
