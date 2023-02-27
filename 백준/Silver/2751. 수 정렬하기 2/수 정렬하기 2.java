@@ -25,10 +25,10 @@ public class Main{
             return null;
         }
 
-        int min = a[0];
-        int max = a[0];
+        int min = a[0]; // 최소값
+        int max = a[0]; // 최대값
 
-        for(int i = 1 ; i < a.length ; i ++){
+        for(int i = 1 ; i < a.length ; i ++){ // 배열 a의 최대값과 최소값 정의
             if(a[i] < min){
                 min = a[i];
             } else if (a[i] > max) {
@@ -36,16 +36,17 @@ public class Main{
             }
         }
 
-        int range = max - min + 1;
-        byte[] cnt = new byte[range];
+        int range = max - min + 1; // 배열의 범위를 지정
+        byte[] cnt = new byte[range]; // range값을 기반으로 byte 배열 생성
 
         for(int i = 0 ; i < a.length ; i ++) {
             cnt[a[i] - min] ++;
-        }
+        }// a의 요소의 발생 횟수 만큼 cnt 값의 갯수 증가. if a[i] = 5, min = 2 -> cnt[3] ++;
+
         int index = 0;
         for(int i = 0 ; i < range ; i++){
-            for(int j = 0 ; j < cnt[i] ; j ++){
-                a[index++] = i + min;
+            for(int j = 0 ; j < cnt[i] ; j ++){ //cnt[i]의 값이 0일 경우 실행되지 않음.
+                a[index++] = i + min; //cnt[i]의 값이 존재 할 경우 a[index]는 i+min, 이후 index 증가
             }
         }
         return a;
